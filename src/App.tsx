@@ -1,34 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useAppStore } from "./store";
+import { useEffect } from "react";
+import "./assets/index.scss";
+import PaletteList from "./components/PaletteList/PaletteList";
+import WorkSpace from "./components/WorkSpace/WorkSpace";
+import TextEdit from "./components/TextEdit/TextEdit";
+import classes from "./components/WorkSpace/WorkSpace.module.scss";
+import {
+  FabricJSCanvas,
+  FabricJSEditor,
+  useFabricJSEditor,
+} from "fabricjs-react";
+import { fabric } from "fabric";
+import MonumentsList from "./components/MonumentsList/MonumentsList";
+import { addBackground } from "./fabricActions";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const fetchPaletteList = useAppStore((state) => state.fetchPaletteList);
+  const fetchCategoriesList = useAppStore((state) => state.fetchCategoriesList);
+  const fetchMonumentsList = useAppStore((state) => state.fetchMonumentsList);
+  const currentMonument = useAppStore((state) => state.currentMonument);
 
+  const { editor, onReady } = useFabricJSEditor();
+
+  useEffect(() => {
+    fetchPaletteList();
+    fetchCategoriesList();
+    fetchMonumentsList();
+
+    let canvasDize: number = 350;
+    if (window.matchMedia("(min-width: 600px)")) {
+      canvasDize = 500;
+    }
+    editor?.canvas.setHeight(canvasDize);
+    editor?.canvas.setWidth(canvasDize);
+  }, []);
+
+  useEffect(() => {
+    addBackground(editor, "http://localhost:3000" + currentMonument.image);
+  }, [currentMonument]);
+
+  useEffect(() => {
+    editor?.addCircle();
+  }, []);
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="b-constructor">
+        <div className="b-constructor__sidebar">
+          <TextEdit />
+          <MonumentsList />
+          <PaletteList />
+        </div>
+        <div className="b-constructor__work-space">
+          <div className={classes.root}>
+            <FabricJSCanvas onReady={onReady} />
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
