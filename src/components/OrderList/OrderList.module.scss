@@ -1,0 +1,27 @@
+.root {
+	padding: 10px;
+	border: 1px solid #d1d1d1;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+.orderList {
+	padding-left: 20px;
+}
+.orderList__item {
+	display: flex;
+	border-bottom: 1px solid #c7c7c7;
+	justify-content: space-between;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+
+	&:last-child {
+		border: none;
+	}
+
+	a {
+		text-decoration: none;
+		color: red;
+	}
+}
