@@ -15,6 +15,7 @@ const MonumentsList = () => {
 
   return (
     <div className={cls.root}>
+      <h2>Форма памятника</h2>
       <div
         className={classNames(
           cls.monumentsTitle,

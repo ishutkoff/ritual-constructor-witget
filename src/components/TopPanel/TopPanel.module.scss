@@ -1,0 +1,27 @@
+.root {
+	display: flex;
+	padding: 10px;
+	border: 1px solid #d1d1d1;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	gap: 10px;
+	position: absolute;
+	z-index: 5;
+	top: 18px;
+}
+
+.removeBtn {
+	background: #e73e3e;
+	color: #fff;
+	&:disabled {
+		background: #e1adad;
+		cursor: default;
+		color: #ffe4e4;
+	}
+}
+.clearAllBtn {
+	&:disabled {
+		cursor: default;
+		color: #bdbdbd;
+	}
+}

@@ -1,15 +1,18 @@
-.root{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #999;
-  width: calc(28% - 4px);
-  border-radius: 5px;
-  margin: 5px;
-  padding: 5px;
+.root {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	background: #121214;
+	border: 1px solid #999;
+	width: calc(46% - 4px);
+	height: 61px;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 5px;
 
-  img{
-    width: 37px;
-    height: auto;
-  }
+	img {
+		width: 37px;
+		height: auto;
+	}
 }
