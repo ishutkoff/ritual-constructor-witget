@@ -1,28 +1,28 @@
 export interface PaletteItem {
-	id: number
-	name: string
-	category: number
-	image: string
+  _id: number;
+  title: string;
+  categoryId: number;
+  image: string;
 }
 
 export interface CategoryItem {
-	id: number
-	name: string
+  _id: number;
+  title: string;
 }
 
 export interface Monument {
-	id?: number
-	name: string
-	image: string
+  _id?: number;
+  title: string;
+  image: string;
 }
 
 export enum CanvasObjectType {
-	img = 'img',
-	text = 'text',
+  img = "img",
+  text = "text",
 }
 
 export interface CanvasObject {
-	id?: number
-	name: string
-	type: CanvasObjectType
+  _id?: number;
+  title: string;
+  type: CanvasObjectType;
 }

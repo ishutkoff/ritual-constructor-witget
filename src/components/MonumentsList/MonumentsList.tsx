@@ -37,7 +37,7 @@ const MonumentsList = () => {
           <MonumentListItem
             onClick={() => setCurrentMonument(monument)}
             item={monument}
-            key={monument.id}
+            key={monument._id}
           />
         ))}
       </div>

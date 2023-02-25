@@ -11,16 +11,17 @@ interface MonumentListItemProps<T> extends DOMAttributes<T> {
 const MonumentListItem: FC<MonumentListItemProps<any>> = (props) => {
   const currentMonument = useAppStore((state) => state.currentMonument);
   const { className, item, ...otherProps } = props;
+  const baseUrl = useAppStore((state) => state.baseUrl);
   return (
     <div
       {...otherProps}
       className={classNames(
         cls.root,
-        { [cls.selected]: currentMonument.id === item.id },
+        { [cls.selected]: currentMonument._id === item._id },
         []
       )}
     >
-      <img src={"http://localhost:3000" + item.image} alt={item.name} />
+      <img src={`${baseUrl}/files/${item.image}`} alt={item.title} />
     </div>
   );
 };
