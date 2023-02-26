@@ -9,6 +9,12 @@ import MonumentsList from "./components/MonumentsList/MonumentsList";
 import { addBackground, addImage, addText } from "./fabricActions";
 import TopPanel from "./components/TopPanel/TopPanel";
 import { OrderList } from "./components/OrderList/OrderList";
+import { OrderForm } from "./components/OrderForm/OrderForm";
+// @ts-ignore
+import { ReactComponent as PrintIcon } from "./assets/icons/print.svg";
+// @ts-ignore
+import { ReactComponent as DownloadIcon } from "./assets/icons/download.svg";
+import { SendFields } from "./types/types";
 
 function App() {
   const fetchCategoriesList = useAppStore((state) => state.fetchCategoriesList);
@@ -17,8 +23,8 @@ function App() {
   const clearOrderList = useAppStore((state) => state.clearOrderList);
   const orderList = useAppStore((state) => state.orderList);
   const removeFromOrderList = useAppStore((state) => state.removeFromOrderList);
+  const currentFont = useAppStore((state) => state.currentFont);
   const getFileB64 = useAppStore((state) => state.getFileB64);
-
   const { selectedObjects, editor, onReady } = useFabricJSEditor();
 
   const selectImage = (url: string) => {
@@ -31,7 +37,7 @@ function App() {
     );
   };
   const addTextHandler = () => {
-    addText(editor);
+    addText(currentFont, editor);
   };
 
   const printCanvas = () => {
@@ -80,6 +86,12 @@ function App() {
     a.click();
     a.remove();
   }
+  function getImage() {
+    return editor?.canvas.toDataURL({
+      format: "png",
+      quality: 0.8,
+    });
+  }
 
   useEffect(() => {
     fetchShopData();
@@ -116,9 +128,7 @@ function App() {
           <TopPanel
             removeHandler={removeHandler}
             removeAllHandler={removeAllHandler}
-            isActiveObjects={
-              selectedObjects && selectedObjects.length > 0 ? true : false
-            }
+            isActiveObjects={!!(selectedObjects && selectedObjects.length > 0)}
             isObjects={true} //TODO Тут захардкодил пока что
           />
           <FabricJSCanvas className="" onReady={onReady} />
@@ -126,64 +136,25 @@ function App() {
         <div className="b-constructor__right-sidebar">
           <div className="b-constructor__right-sidebar-wrapper">
             <OrderList removeHandler={removeHandler} />
-            <button
-              className="b-constructor__download-btn"
-              onClick={saveImage}
-              disabled={orderList.length === 0}
-            >
-              <svg
-                width="800px"
-                height="800px"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            <div className="sidebar-button-wrapper">
+              <button
+                className="b-constructor__download-btn"
+                onClick={saveImage}
+                disabled={orderList.length === 0}
               >
-                <path
-                  d="M13 4H8.8C7.11984 4 6.27976 4 5.63803 4.32698C5.07354 4.6146 4.6146 5.07354 4.32698 5.63803C4 6.27976 4 7.11984 4 8.8V15.2C4 16.8802 4 17.7202 4.32698 18.362C4.6146 18.9265 5.07354 19.3854 5.63803 19.673C6.27976 20 7.11984 20 8.8 20H15.2C16.8802 20 17.7202 20 18.362 19.673C18.9265 19.3854 19.3854 18.9265 19.673 18.362C20 17.7202 20 16.8802 20 15.2V11"
-                  stroke="#fff"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M4 16L8.29289 11.7071C8.68342 11.3166 9.31658 11.3166 9.70711 11.7071L13 15M13 15L15.7929 12.2071C16.1834 11.8166 16.8166 11.8166 17.2071 12.2071L20 15M13 15L15.25 17.25"
-                  stroke="#fff"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M18 3V8M18 8L16 6M18 8L20 6"
-                  stroke="#fff"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              Скачать
-            </button>
-            <button
-              className="b-constructor__print-btn"
-              onClick={() => printCanvas()}
-              disabled={orderList.length === 0}
-            >
-              <svg
-                width="800px"
-                height="800px"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                <DownloadIcon />
+                Скачать
+              </button>
+              <button
+                className="b-constructor__print-btn"
+                onClick={() => printCanvas()}
+                disabled={orderList.length === 0}
               >
-                <path
-                  stroke="#fff"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 17H5a1 1 0 01-1-1v-5a2 2 0 012-2h12a2 2 0 012 2v5a1 1 0 01-1 1h-3M8 4h8v5H8V4zm0 11h8v4H8v-4z"
-                />
-                <circle cx="7" cy="12" r="1" fill="#fff" />
-              </svg>
-              На печать
-            </button>
+                <PrintIcon />
+                На печать
+              </button>
+            </div>
+            <OrderForm getImage={getImage} disabled={orderList.length === 0} />
           </div>
         </div>
       </div>

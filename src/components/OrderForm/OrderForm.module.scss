@@ -1,0 +1,93 @@
+.orderModal{
+  display: none;
+  margin-top: 20px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+
+    input{
+      height: 40px;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 18px;
+    }
+
+    button{
+      display: flex;
+      width: 200px;
+      cursor: pointer;
+      opacity: 0.9;
+      background: #141616;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      align-items: center;
+      justify-content: left;
+
+      &:hover{
+        opacity: 1
+      }
+      &:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.open{
+display: flex;
+}
+
+.orderToggleBtn{
+  display: flex;
+  width: 100%;
+  opacity: 0.9;
+  cursor: pointer;
+  background: #141616;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  &:hover{
+    opacity: 1;
+  }
+  &:disabled {
+     opacity: 0.6;
+     cursor: default;
+   }
+     &.hide{
+       display: none;
+     }
+
+ svg {
+    width: 27px;
+    height: 29px;
+    margin-right: 10px;
+  }
+}
+.successMessage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #188b18;
+  color: #fff;
+  margin-top: 21px;
+  padding: 10px;
+  border-radius: 5px;
+}

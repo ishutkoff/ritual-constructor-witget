@@ -10,6 +10,11 @@ export interface CategoryItem {
   title: string;
 }
 
+export interface SendFields {
+  name: string;
+  phone: string;
+}
+
 export interface Monument {
   _id?: number;
   title: string;

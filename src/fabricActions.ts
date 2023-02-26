@@ -1,6 +1,18 @@
 import { FabricJSEditor } from "fabricjs-react";
 import { fabric } from "fabric";
+import * as WebFont from "webfontloader";
 
+WebFont.load({
+  custom: {
+    families: [
+      "CaslonBecker",
+      "GoodVibesPro",
+      "Cancellaresca",
+      "MiamaNueva",
+      "SnellRoundhand",
+    ],
+  },
+});
 export const addBackground = (editor?: FabricJSEditor, url?: string) => {
   if (!editor || !fabric || !url) {
     return;
@@ -41,22 +53,27 @@ export const addImage = (editor?: FabricJSEditor, url?: string) => {
   });
 };
 
-export const addText = (editor?: FabricJSEditor) => {
+export const addText = (font: string, editor?: FabricJSEditor) => {
   if (!editor) {
     return;
   }
   let text = new fabric.IText("Пример надписи", {
     // fontFamily: "arial black",
-    fontFamily: "Times New Roman",
+    fontFamily: font,
+    objectCaching: false,
     left: 100,
     top: 100,
-    fontSize: 16,
+    fontSize: 30,
   });
+
   text.set({ fill: "#c5c5c5" });
   text.setControlVisible("ml", false);
   text.setControlVisible("mb", false);
   text.setControlVisible("mr", false);
   text.setControlVisible("mt", false);
+
   editor.canvas.centerObject(text);
   editor.canvas.add(text);
+  fabric.util.clearFabricFontCache();
+  editor.canvas.renderAll();
 };

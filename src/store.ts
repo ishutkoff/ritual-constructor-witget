@@ -24,6 +24,11 @@ interface AppStore {
   getFileB64: (url: string, callback: () => void) => void;
   getPalettesByCategory: (categoryId: number) => PaletteItem[];
   orderList: CanvasObject[];
+
+  fontsList: string[];
+  currentFont: string;
+
+  setCurrentFont: (font: string) => void;
 }
 const useAppStore = create<AppStore>()(
   immer(
@@ -37,6 +42,21 @@ const useAppStore = create<AppStore>()(
           title: "",
           image: "",
         },
+        fontsList: [
+          "Times New Roman",
+          "Arial",
+          "Cancellaresca",
+          "CaslonBecker",
+          "GoodVibesPro",
+          "MiamaNueva",
+          "SnellRoundhand",
+        ],
+        setCurrentFont: (font) => {
+          set((state) => {
+            state.currentFont = font;
+          });
+        },
+        currentFont: "Times New Roman",
         orderList: [],
         categoriesList: [],
 
