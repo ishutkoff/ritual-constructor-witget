@@ -7,10 +7,11 @@ import PaletteListItem from "../PaletteListItem/PaletteListItem";
 
 interface PaletteListProps {
   selectImage: (url: string) => void;
+  scrollToCanvas: () => void;
 }
 
 const PaletteList = (props: PaletteListProps) => {
-  const { selectImage } = props;
+  const { selectImage, scrollToCanvas } = props;
   const categoriesList = useAppStore((state) => state.categoriesList);
   const getPalettesByCategory = useAppStore(
     (state) => state.getPalettesByCategory
@@ -55,6 +56,8 @@ const PaletteList = (props: PaletteListProps) => {
                     type: CanvasObjectType.img,
                   });
                   selectImage(`${baseUrl}/files/${item.image}`);
+                  setCurrentCategory(0)
+                  scrollToCanvas()
                 }}
                 item={item}
                 key={item._id}

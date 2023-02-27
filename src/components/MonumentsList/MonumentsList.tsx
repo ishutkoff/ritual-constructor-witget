@@ -4,9 +4,15 @@ import { useAppStore } from "../../store";
 import { classNames } from "../../libs/classNames";
 import MonumentListItem from "../MonumentListItem/MonumentListItem";
 
-const MonumentsList = () => {
+interface MonumentListProps {
+  scrollToCanvas: ()=>void
+}
+
+const MonumentsList = (props:MonumentListProps) => {
+  const {scrollToCanvas} = props
   const monumentsList = useAppStore((state) => state.monumentsList);
   const setCurrentMonument = useAppStore((state) => state.setCurrentMonument);
+
 
   const [collapsed, setCollapsed] = useState(false);
   const setCollapse = () => {
@@ -35,7 +41,12 @@ const MonumentsList = () => {
       >
         {monumentsList.map((monument) => (
           <MonumentListItem
-            onClick={() => setCurrentMonument(monument)}
+            onClick={() => {
+              setCurrentMonument(monument)
+              setCollapsed(false)
+              scrollToCanvas()
+            }
+            }
             item={monument}
             key={monument._id}
           />

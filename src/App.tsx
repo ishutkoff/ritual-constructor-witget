@@ -1,5 +1,5 @@
 import { useAppStore } from "./store";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./assets/index.scss";
 import PaletteList from "./components/PaletteList/PaletteList";
 import TextEdit from "./components/TextEdit/TextEdit";
@@ -116,13 +116,17 @@ function App() {
     );
   }, [currentMonument]);
 
+  const canvas:React.RefObject<HTMLInputElement> = React.createRef()
+  const scrollToCanvas = () => { // @ts-ignore
+    window.scrollTo(0, canvas.current.scrollHeight - canvas.current.height)
+  }
   return (
     <div className="App">
-      <div className="b-constructor">
+      <div ref={canvas} className="b-constructor">
         <div className="b-constructor__left-sidebar">
           <TextEdit addTextHandler={addTextHandler} />
-          <MonumentsList />
-          <PaletteList selectImage={selectImage} />
+          <MonumentsList scrollToCanvas={scrollToCanvas} />
+          <PaletteList scrollToCanvas={scrollToCanvas} selectImage={selectImage} />
         </div>
         <div className="b-constructor__work-space">
           <TopPanel
@@ -136,6 +140,7 @@ function App() {
         <div className="b-constructor__right-sidebar">
           <div className="b-constructor__right-sidebar-wrapper">
             <OrderList removeHandler={removeHandler} />
+            <OrderForm getImage={getImage} disabled={orderList.length === 0} />
             <div className="sidebar-button-wrapper">
               <button
                 className="b-constructor__download-btn"
@@ -154,7 +159,7 @@ function App() {
                 На печать
               </button>
             </div>
-            <OrderForm getImage={getImage} disabled={orderList.length === 0} />
+
           </div>
         </div>
       </div>
