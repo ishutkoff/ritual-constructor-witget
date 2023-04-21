@@ -1,0 +1,89 @@
+.orderModal {
+  display: none;
+  margin-top: 20px;
+}
+.orderModal form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+.orderModal form input {
+  height: 40px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+.orderModal form button {
+  display: flex;
+  width: 200px;
+  cursor: pointer;
+  opacity: 0.9;
+  background: #141616;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  align-items: center;
+  justify-content: left;
+}
+.orderModal form button:hover {
+  opacity: 1;
+}
+.orderModal form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.open {
+  display: flex;
+}
+
+.orderToggleBtn {
+  display: flex;
+  width: 100%;
+  opacity: 0.9;
+  cursor: pointer;
+  background: #141616;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.orderToggleBtn:hover {
+  opacity: 1;
+}
+.orderToggleBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.orderToggleBtn.hide {
+  display: none;
+}
+.orderToggleBtn svg {
+  width: 27px;
+  height: 29px;
+  margin-right: 10px;
+}
+
+.successMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #188b18;
+  color: #fff;
+  margin-top: 21px;
+  padding: 10px;
+  border-radius: 5px;
+}/*# sourceMappingURL=OrderForm.module.css.map */

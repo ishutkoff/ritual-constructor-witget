@@ -1,0 +1,47 @@
+@charset "UTF-8";
+.root {
+  padding: 10px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.categoryTitle {
+  cursor: pointer;
+  border: 1px solid;
+  margin-bottom: 7px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.categoryTitle {
+  display: flex;
+  justify-content: space-between;
+}
+.categoryTitle:after {
+  content: "▼";
+  transition: all 0.2s;
+}
+
+.selectedCategory .categoryTitle {
+  margin-bottom: 10px;
+}
+.selectedCategory .categoryTitle:after {
+  transform: rotate(180deg);
+}
+.selectedCategory .paletteWrapper {
+  max-height: 300px;
+  overflow-y: auto;
+  height: auto;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.paletteWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 0;
+  height: 0;
+  overflow: hidden;
+}/*# sourceMappingURL=PaletteList.module.css.map */

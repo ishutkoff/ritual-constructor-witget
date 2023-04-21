@@ -1,0 +1,14 @@
+.AppButton {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #999;
+}
+
+.clear {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  background: none;
+}/*# sourceMappingURL=AppButton.module.css.map */
