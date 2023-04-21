@@ -4,16 +4,18 @@ import "./assets/index.scss";
 import PaletteList from "./components/PaletteList/PaletteList";
 import TextEdit from "./components/TextEdit/TextEdit";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
-import { fabric } from "fabric";
 import MonumentsList from "./components/MonumentsList/MonumentsList";
 import { addBackground, addImage, addText } from "./fabricActions";
 import TopPanel from "./components/TopPanel/TopPanel";
 import { OrderList } from "./components/OrderList/OrderList";
 import { OrderForm } from "./components/OrderForm/OrderForm";
-// @ts-ignore
+// @ts-ignore //TODO Костыль с типизацией. Нужно поправить
 import { ReactComponent as PrintIcon } from "./assets/icons/print.svg";
-// @ts-ignore
+// @ts-ignore //TODO Костыль с типизацией. Нужно поправить
 import { ReactComponent as DownloadIcon } from "./assets/icons/download.svg";
+// @ts-ignore //TODO Костыль с типизацией. Нужно поправить
+import { ReactComponent as CloseIcon } from "./assets/icons/close.svg";
+
 import { SendFields } from "./types/types";
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
   const getFileB64 = useAppStore((state) => state.getFileB64);
   const { selectedObjects, editor, onReady } = useFabricJSEditor();
 
+  const [mobileSidebarToggle, SetMobileSidebarToggle] = useState(false)
+
   const selectImage = (url: string) => {
     getFileB64(
       url,
@@ -35,9 +39,11 @@ function App() {
         addImage(editor, myBase64);
       }
     );
+      SetMobileSidebarToggle(!mobileSidebarToggle)
   };
   const addTextHandler = () => {
     addText(currentFont, editor);
+    SetMobileSidebarToggle(!mobileSidebarToggle)
   };
 
   const printCanvas = () => {
@@ -99,7 +105,7 @@ function App() {
 
     let canvasDize: number = 400;
     if (window.matchMedia("(min-width: 600px)")) {
-      canvasDize = 400;
+      canvasDize = 500;
     }
 
     editor?.canvas.setHeight(canvasDize);
@@ -109,7 +115,7 @@ function App() {
   useEffect(() => {
     getFileB64(
       `${baseUrl}/files/${currentMonument.image}`,
-      // @ts-ignore
+      // @ts-ignore               //TODO Костыль с типизацией. Нужно поправить
       function (myBase64) {
         addBackground(editor, myBase64);
       }
@@ -117,15 +123,17 @@ function App() {
   }, [currentMonument]);
 
   const canvas:React.RefObject<HTMLInputElement> = React.createRef()
-  const scrollToCanvas = () => { // @ts-ignore
+  const scrollToCanvas = () => { // @ts-ignore //TODO Костыль с типизацией. Нужно поправить
     window.scrollTo(0, canvas.current.scrollHeight - canvas.current.height)
   }
   return (
     <div className="App">
       <div ref={canvas} className="b-constructor">
-        <div className="b-constructor__left-sidebar">
+        <div onClick={()=>SetMobileSidebarToggle( !mobileSidebarToggle)} className="b-constructor__left-sidebar-toggler">Добавить изображение</div>
+        <div className={'b-constructor__left-sidebar '+(mobileSidebarToggle ? 'b-constructor__left-sidebar--toggle': '')}>
+          <div onClick={()=>SetMobileSidebarToggle( !mobileSidebarToggle)} className="b-constructor__left-sidebar-close-btn"><CloseIcon/></div>
           <TextEdit addTextHandler={addTextHandler} />
-          <MonumentsList scrollToCanvas={scrollToCanvas} />
+          <MonumentsList scrollToCanvas={scrollToCanvas} setMobileSidebarToggle={SetMobileSidebarToggle} />
           <PaletteList scrollToCanvas={scrollToCanvas} selectImage={selectImage} />
         </div>
         <div className="b-constructor__work-space">
@@ -133,7 +141,7 @@ function App() {
             removeHandler={removeHandler}
             removeAllHandler={removeAllHandler}
             isActiveObjects={!!(selectedObjects && selectedObjects.length > 0)}
-            isObjects={true} //TODO Тут захардкодил пока что
+            isObjects={true} //TODO Заглушка.
           />
           <FabricJSCanvas className="" onReady={onReady} />
         </div>

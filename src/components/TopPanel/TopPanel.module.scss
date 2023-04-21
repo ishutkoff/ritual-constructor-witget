@@ -8,18 +8,82 @@
 	position: absolute;
 	z-index: 5;
 	top: 18px;
+
+	@media (max-width: 980px) {
+		flex-direction: column;
+		position: fixed;
+		top: 8%;
+		left: 10px;
+		padding: 0;
+		border: none;
+	}
 }
 
 .removeBtn {
+	display: flex;
+	align-items: center;
+	justify-self: center;
 	background: #e73e3e;
 	color: #fff;
+
+	@media (max-width: 980px) {
+		padding: 10px;
+	}
+
+	span {
+		@media (max-width: 980px) {
+			display: none;
+		}
+	}
+
+	svg {
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+		fill: #fff;
+
+		@media (max-width: 980px) {
+			margin-right: 0;
+			width: 15px;
+			height: 15px;
+		}
+	}
+
 	&:disabled {
 		background: #e1adad;
 		cursor: default;
 		color: #ffe4e4;
 	}
 }
+
 .clearAllBtn {
+	display: flex;
+	align-items: center;
+	justify-self: center;
+
+	@media (max-width: 980px) {
+		padding: 10px;
+	}
+
+	span {
+		@media (max-width: 980px) {
+			display: none;
+		}
+	}
+
+	svg {
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+		fill: #6b6868;
+
+		@media (max-width: 980px) {
+			margin-right: 0;
+			width: 15px;
+			height: 15px;
+		}
+	}
+
 	&:disabled {
 		cursor: default;
 		color: #bdbdbd;

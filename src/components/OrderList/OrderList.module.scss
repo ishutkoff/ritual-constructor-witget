@@ -3,11 +3,16 @@
 	border: 1px solid #d1d1d1;
 	border-radius: 10px;
 	margin-bottom: 10px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 .orderList {
 	padding-left: 20px;
 }
+
 .orderList__item {
 	display: flex;
 	border-bottom: 1px solid #c7c7c7;

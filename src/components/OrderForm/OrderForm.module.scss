@@ -1,4 +1,4 @@
-.orderModal{
+.orderModal {
   display: none;
   margin-top: 20px;
 
@@ -8,14 +8,14 @@
     gap: 20px;
     width: 100%;
 
-    input{
+    input {
       height: 40px;
       border-radius: 5px;
       padding: 5px 10px;
       font-size: 18px;
     }
 
-    button{
+    button {
       display: flex;
       width: 200px;
       cursor: pointer;
@@ -32,9 +32,10 @@
       align-items: center;
       justify-content: left;
 
-      &:hover{
+      &:hover {
         opacity: 1
       }
+
       &:disabled {
         opacity: 0.6;
         cursor: default;
@@ -43,11 +44,11 @@
   }
 }
 
-.open{
-display: flex;
+.open {
+  display: flex;
 }
 
-.orderToggleBtn{
+.orderToggleBtn {
   display: flex;
   width: 100%;
   opacity: 0.9;
@@ -64,24 +65,32 @@ display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
-  &:hover{
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  &:hover {
     opacity: 1;
   }
-  &:disabled {
-     opacity: 0.6;
-     cursor: default;
-   }
-     &.hide{
-       display: none;
-     }
 
- svg {
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  &.hide {
+    display: none;
+  }
+
+  svg {
     width: 27px;
     height: 29px;
     margin-right: 10px;
   }
 }
-.successMessage{
+
+.successMessage {
   display: flex;
   justify-content: center;
   align-items: center;

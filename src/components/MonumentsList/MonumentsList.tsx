@@ -6,10 +6,11 @@ import MonumentListItem from "../MonumentListItem/MonumentListItem";
 
 interface MonumentListProps {
   scrollToCanvas: ()=>void
+  setMobileSidebarToggle: (value:boolean)=>void
 }
 
 const MonumentsList = (props:MonumentListProps) => {
-  const {scrollToCanvas} = props
+  const {scrollToCanvas, setMobileSidebarToggle} = props
   const monumentsList = useAppStore((state) => state.monumentsList);
   const setCurrentMonument = useAppStore((state) => state.setCurrentMonument);
 
@@ -45,6 +46,7 @@ const MonumentsList = (props:MonumentListProps) => {
               setCurrentMonument(monument)
               setCollapsed(false)
               scrollToCanvas()
+              setMobileSidebarToggle(false)
             }
             }
             item={monument}
